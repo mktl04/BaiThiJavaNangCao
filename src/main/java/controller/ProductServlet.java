@@ -36,7 +36,11 @@ public class ProductServlet extends HttpServlet {
        TheLoaiDAO tlDAO = new TheLoaiDAO();
        SanPhamDAO spDAO = new SanPhamDAO();
        
-       int maloai = request.getParameter("maloai")==null? 
+       int maloai = request.getParameter("maloai")==null? 1: Integer.parseInt(request.getParameter("maloai"));
+       
+       request.setAttribute("dsLoai", tlDAO.getAll());
+       request.setAttribute("dsSP", spDAO.getByCategoryId(maloai));
+       request.getRequestDispatcher("product.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
